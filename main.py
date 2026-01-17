@@ -3,7 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, MessageHandler, ContextTypes, filters, CommandHandler
 
 # 🔐 التوكن ديال البوت (ديرو فـ Render Environment Variable)
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = "8319614693:AAH2UBmAdOsiBDq5irxSuDufmNI5WFFtwNQ"
 
 # 🔗 Deep Link ديال AliExpress Affiliate
 DEEPLINK = "https://s.click.aliexpress.com/e/_c3XgvCtD"
