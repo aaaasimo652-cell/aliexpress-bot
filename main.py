@@ -1,12 +1,16 @@
 import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, MessageHandler, ContextTypes, filters, CommandHandler
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    MessageHandler,
+    ContextTypes,
+    filters,
+)
 
-# 🔐 التوكن ديال البوت (ديرو فـ Render Environment Variable)
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-# 🔗 Deep Link ديال AliExpress Affiliate
-DEEPLINK = "https://s.click.aliexpress.com/e/_c3XgvCtD"
+DEEPLINK = "https://s.click.aliexpress.com/e/_c3XgvtD"
 
 def make_affiliate_link(url: str) -> str:
     return f"{DEEPLINK}?url={url}"
@@ -14,8 +18,8 @@ def make_affiliate_link(url: str) -> str:
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "👋 مرحبا!\n\n"
-        "🔗 صيفط أي رابط ديال AliExpress\n"
-        "📦 وأنا نرجع ليك رابط Affiliate ديالك مباشرة 🔥"
+        "🔗 صيفط رابط AliExpress\n"
+        "🔥 نرجعو ليك رابط Affiliate ديالك"
     )
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -25,18 +29,17 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
 
     if "aliexpress.com" not in text:
-        await update.message.reply_text("❌ صيفط غير رابط صحيح ديال AliExpress")
+        await update.message.reply_text("❌ صيفط غير رابط AliExpress")
         return
 
     affiliate_link = make_affiliate_link(text)
 
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("🔥 شراء بالرابط الذكي", url=affiliate_link)],
-        [InlineKeyboardButton("📋 نسخ الرابط", url=affiliate_link)]
+        [InlineKeyboardButton("🔥 رابط الشراء", url=affiliate_link)]
     ])
 
     await update.message.reply_text(
-        "✅ تم إنشاء رابط Affiliate بنجاح:",
+        "✅ هذا هو رابط Affiliate ديالك:",
         reply_markup=keyboard
     )
 
